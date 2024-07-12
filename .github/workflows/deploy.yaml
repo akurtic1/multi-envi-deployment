@@ -1,0 +1,28 @@
+trigger:
+  branches:
+    include:
+    - main
+
+ pool:
+ vmImage: 'ubuntu-latest'
+  
+variables:
+  azureSubscription: 'db58ceb6-f414-4820-91f4-5c52e0be06e7'
+  resourceGroupName: 'azure-multi'
+  location: 'West Europe'
+
+stages:
+  - stage: DeployDevelopment
+    jobs:
+      - job: DeployDev
+        steps:
+          - checkout: self
+
+          - task: AzureCLI@2
+            inputs:
+              azureSubscription: $(azureSubscription)
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                az group create --name $(resourceGroupName) --location $(location)
+                az deployment group create --resource-group $(resourceGroupName) --template-file C:\Users\akurt\Azure Projects\azure-iac\multi-envi-deployment\infrastructure.bicep
