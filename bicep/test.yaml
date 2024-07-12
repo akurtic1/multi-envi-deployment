@@ -2,8 +2,8 @@ trigger:
   branches:
     include:
       - main
-      #ff
- pool:
+
+pool:
   vmImage: 'ubuntu-latest'
 
 variables:
