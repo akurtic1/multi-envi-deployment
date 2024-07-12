@@ -3,9 +3,8 @@ trigger:
     include:
       - main
 
-      
-      pool:
-vmImage: 'ubuntu-latest'
+pool:
+  vmImage: 'ubuntu-latest'
 
 variables:
   azureSubscription: 'db58ceb6-f414-4820-91f4-5c52e0be06e7'
